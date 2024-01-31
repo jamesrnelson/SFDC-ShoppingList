@@ -1,0 +1,149 @@
+<template>
+    <div class="slds-theme_default slds-p-around_small">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={relatedListIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="List Name">Grocery List</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-scrollable_y allow-overflow" style="max-height:30rem">
+            <lightning-input
+                onchange={handleSearchTermChange}
+                class="slds-col slds-size_1-of-1 slds-m-around_x-small slds-p-right_medium"
+                type="text"
+                name="recipeName"
+                placeholder="Search Recipes"
+                value={searchedRecipeName}
+                nolabel
+            ></lightning-input>
+            <span>
+                <lightning-button   
+                    variant="brand"
+                    label="Create New Recipe"
+                    title="Create New"
+                    onclick={handleCreateNewRecipe}
+                    class="slds-col slds-size_1-of-3 slds-m-around_x-small">
+                </lightning-button>
+            </span>
+            <span>
+                <lightning-button   
+                    variant="default"
+                    label="Clear Results"
+                    title="Clear Results"
+                    onclick={handleClearResults}
+                    class="slds-col slds-size_1-of-3 slds-m-around_x-small">
+                </lightning-button>
+            </span>
+            <template for:each={recipeList} for:item="recipe">
+                <div key={recipe.Id} class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small">
+                    <span class="slds-size_12-of-12 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                        <span class="slds-col slds-size_1-of-2">
+                            <c-record-link
+                                record-id={recipe.Id}
+                                object-api-name="Recipe__c"
+                                value-to-link={recipe.Name}
+                            ></c-record-link>
+                        </span>
+                        <span class="slds-col slds-size_1-of-2">
+                            <lightning-button   
+                                variant="default"
+                                label="Add"
+                                title="Add"
+                                value={recipe}
+                                onclick={handleAddRecipe}
+                                class="slds-float_right">
+                            </lightning-button>
+                        </span>
+                    </span>
+                </div>
+            </template>
+            <span class="slds-size_12-of-12 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                <span class="slds-col slds-size_1-of-1">
+                    <c-display-shopping-list-recipes
+                        record-id={recordId}
+                    ></c-display-shopping-list-recipes>
+                </span>
+                <span class="slds-col slds-size_1-of-1">
+                    <c-display-shopping-list-ingredients
+                        record-id={recordId}
+                    ></c-display-shopping-list-ingredients>
+                </span>
+            </span>
+        </div>
+
+        <!-- Begin Create New Recipe Modal -->
+        <template if:true={showNewRecipeModal}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeNewRecipeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" >
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New Recipe</h2>
+                </header>
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1">
+                    <lightning-record-edit-form object-api-name="Recipe__c" onload={stopModalSpinner} onsuccess={handleSuccess} onerror={handleError}>
+                        <div if:false={isModalLoaded} class="slds-is-relative">
+                            <lightning-spinner
+                                alternative-text="Loading...">
+                            </lightning-spinner>
+                        </div>
+                        <lightning-messages>
+                        </lightning-messages>
+                        <div if:true={isModalLoaded}>
+                            <lightning-input-field field-name="Name" value={searchedRecipeName} onchange={handleSearchTermChange}></lightning-input-field>
+                            <lightning-input-field field-name="Link_to_Online_Recipe__c"></lightning-input-field>
+                            <lightning-button
+                                class="slds-m-top_small"
+                                type="submit"
+                                variant="brand"
+                                label="Save"
+                            >
+                            </lightning-button>
+                            <template if:true={newRecipeId}>
+                                <c-add-ingredients-to-recipe
+                                    record-id={newRecipeId}
+                                ></c-add-ingredients-to-recipe>
+                                <lightning-button
+                                    class="slds-m-top_small"
+                                    type="done"
+                                    variant="brand-outline"
+                                    label="Done Adding Ingredients"
+                                    onclick={closeNewRecipeModal}
+                                ></lightning-button>
+                            </template>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>
+</template>

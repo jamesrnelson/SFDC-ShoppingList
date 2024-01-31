@@ -1,0 +1,19 @@
+<template>
+    <div class="slds-text-heading_small slds-m-top_small">Recipes Added to List:</div>
+    <template for:each={addedRecipes} for:item="recipe">
+        <div key={recipe.Id} class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small">
+            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                <span class="slds-col slds-size_1-of-2">
+                    <c-record-link
+                        record-id={recipe.Recipe__c}
+                        object-api-name="Recipe__c"
+                        value-to-link={recipe.Recipe__r.Name}
+                    ></c-record-link>
+                </span>
+                <span class="slds-col slds-size_1-of-2">
+                    <a href={recipe.Recipe__r.Link_to_Online_Recipe__c} target="_blank">{recipe.Recipe__r.Link_to_Online_Recipe__c}</a>
+                </span>
+            </span>
+        </div>
+    </template>
+</template>

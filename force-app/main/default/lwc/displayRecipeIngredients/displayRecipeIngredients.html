@@ -1,0 +1,11 @@
+<template>
+    <div class="slds-text-heading_small slds-m-top_small">Ingredients Added to Recipe:</div>
+    <template for:each={addedIngredients} for:item="ingredient">
+        <div key={ingredient.Id} class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small">
+            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                <span class="slds-col slds-size_1-of-2">{ingredient.Quantity__c} {ingredient.Measurement__c}</span>
+                <span class="slds-col slds-size_1-of-2">{ingredient.Ingredient__r.Name}</span>
+            </span>
+        </div>
+    </template>
+</template>

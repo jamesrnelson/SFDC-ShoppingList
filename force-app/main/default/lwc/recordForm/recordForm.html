@@ -1,0 +1,41 @@
+<template>
+    <lightning-button   
+        variant="default"
+        label={label}
+        title={label}
+        onclick={openObjectModal}
+        class="slds-float_right">
+    </lightning-button>
+    <template if:true={showObjectModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeObjectModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" >
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{createOrEdit} Record</h2>
+                </header>
+                <!-- modal body start -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-form
+                        record-id={recordId}
+                        object-api-name={objectApiName}
+                        record-type-id={recordTypeId}
+                        layout-type="Full"
+                        mode={createOrEdit}
+                        onsubmit={handleSubmit}
+                        oncancel={handleCancel}>
+                    </lightning-record-form>
+                    
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

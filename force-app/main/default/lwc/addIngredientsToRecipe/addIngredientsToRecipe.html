@@ -1,0 +1,82 @@
+<template>
+    <div class="slds-theme_default slds-p-around_small">
+        <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+            <span class="slds-col slds-size_1-of-1">
+                <lightning-input
+                    onchange={handleSearchTermChange}
+                    type="text"
+                    name="recipeName"
+                    placeholder="Search Ingredients"
+                    value={searchedIngredientName}
+                    nolabel
+                ></lightning-input>
+            </span>
+        
+            <span class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                <template if:true={displayCreateButton}>
+                    <lightning-button   
+                        variant="brand"
+                        label={labelDisplay}
+                        title="Create"
+                        value={searchParam}
+                        onclick={handleCreateIngredient}
+                    ></lightning-button>
+                </template>
+            </span>
+            <span class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                <template if:true={searchedIngredientName}>
+                    <lightning-button   
+                        variant="default"
+                        label="Clear Results"
+                        title="Clear Results"
+                        onclick={handleClearResults}
+                    ></lightning-button>
+                </template>
+            </span>
+        </span>
+        <template for:each={ingredientList} for:item="ingredient">
+            <div key={ingredient.Id} data-key={ingredient.Id}>
+                <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-top_small slds-grid_vertical-align-center">
+                    <lightning-input
+                        onchange={handleQuantityChange}
+                        class="slds-col slds-size_1-of-4 slds-m-around_x-small "
+                        type="number"
+                        name={ingredient.Id}
+                        step="0.001"
+                        placeholder="Quantity"
+                        value=""
+                        variant="label-hidden"
+                    ></lightning-input>
+                    <lightning-combobox
+                        name={ingredient.Id}
+                        class="slds-col slds-size_1-of-4 slds-m-around_x-small "
+                        value={value}
+                        placeholder="Measurement"
+                        options={options}
+                        onchange={handleMeasurementChange}
+                        variant="label-hidden"
+                    ></lightning-combobox>
+                    <span class="slds-col slds-size_1-of-4">{ingredient.Name}</span>
+                    <span class="slds-col slds-size_1-of-6">
+                        <lightning-button   
+                            variant="default"
+                            label="Add"
+                            title="Add"
+                            value={ingredient.Id}
+                            onclick={handleAddIngredient}
+                            class="slds-m-top_small slds-p-left_small">
+                        </lightning-button>
+                    </span>
+                </span>
+            </div>
+        </template>
+
+        <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+            <span class="slds-col slds-size_1-of-1">
+                <c-display-recipe-ingredients
+                    record-id={recordId}
+                ></c-display-recipe-ingredients>
+            </span>
+        </span>
+    </div>
+</template>

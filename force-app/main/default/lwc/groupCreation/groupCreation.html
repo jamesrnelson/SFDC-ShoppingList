@@ -1,0 +1,79 @@
+<template>
+    <div class="slds-theme_default slds-p-around_small">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={relatedListIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Related List Name">Coffee Group Creation</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:false={displayGroups}>
+            <lightning-input class="slds-m-around_medium groupInput" type="number" label="Number of Groups"></lightning-input>
+            <lightning-input class="slds-m-around_medium peopleInput" type="number" label="Number of People per Group"></lightning-input>
+            <lightning-button class="slds-m-around_medium slds-p-bottom_medium" variant="brand" label="Create Groups" title="Create Groups" onclick={createGroups}></lightning-button>
+        </template>
+        <template if:true={displayGroups}>
+            <div class="slds-text-longform">
+                <h3 class="slds-text-heading_small">
+                    Groups
+                </h3>
+                <ul>
+                    <template for:each={groupArray} for:item="group">
+                        <li key={group.id}>
+                                Group Number: {group.id}
+                            <ol>
+                                <template for:each={group.names} for:item="name">
+                                    <li key={name.id}>{name}</li>
+                                </template>
+                            </ol>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+            <template if:false={groupsExist}>
+                <lightning-button
+                    class="slds-m-right_medium"
+                    variant="base"
+                    label="Cancel"
+                    title="Cancel Group Creation"
+                    icon-position="left"
+                    icon-name="utility:close"
+                    onclick={handleCancel}>
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="Create Groups"
+                    title="Create Groups"
+                    onclick={handleCreate}>
+                </lightning-button>
+            </template>
+        </template>
+        <template if:true={groupsExist}>
+            <template if:false={groupGenerationCheckbox}>
+                <lightning-button
+                    variant="brand"
+                    label="Update Count On Pair Records"
+                    title="Update Count On Pair Records"
+                    onclick={handleCountUpdate}>
+                </lightning-button>
+            </template>
+        </template>
+    </div>
+</template>

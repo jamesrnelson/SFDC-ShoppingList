@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+        <supportedFormFactors>
+                <supportedFormFactor type="Small" />
+                <supportedFormFactor type="Large" />
+            </supportedFormFactors>
+            <property label="Related List Name" name="relatedListName" type="String" 
+                        description="The name of the related list as you would like it to appear on the record page."/>
+            <property label="Related List Icon" name="relatedListIcon" type="String" 
+                        description="The path to the lightning design system icon that can be found in this library: https://www.lightningdesignsystem.com/icons/"/>
+            <property label="Child Relationship Name" name="childRelationshipName" type="String" 
+                        description="The child relationship name as found on the lookup field that creates the relationship between these objects. 
+                        Be sure to include '__r' if this is a custom relationship."/>
+            <property label="Child Object Name" name="childObjectApiName" type="String" 
+                        description="The API name of the object that the related list shows records for."/>
+            <property label="Parent Lookup Field Name" name="parentLookupField" type="String" 
+                        description="The API name of the field on the child object that makes the relationship between the parent and the child."/>
+            <property label="Record Type" name="recordType" type="String" description="We expect record type label NOT record type developer name."/>
+            <property label="Column 1" name="column1" type="String"/>
+            <property label="Column 2" name="column2" type="String"/>
+            <property label="Column 3" name="column3" type="String"/>
+            <property label="Column 4" name="column4" type="String"/>
+            <property label="Column 5" name="column5" type="String"/>
+            <property label="Column 6" name="column6" type="String"/>
+            <property label="Column 7" name="column7" type="String"/>
+            <property label="Column 8" name="column8" type="String"/>
+            <property label="Column 1 Should Link to Record" name="column1LinkOverride" type="Boolean"
+                        description="The text displayed in column 1 should link to a specific record"/>
+            <property label="Column 1 Linked Record" name="column1LinkedRecord" type="String"
+                        description="A formaula field on the child object that stores the Id of the record to link to."/>
+            <property label="Column 1 Linked Record Object API Name" name="column1LinkedObject" type="String"
+                        description="The API name of the object for the record that is being linked."/>
+            <property label="Column 2 Should Link to Record" name="column2LinkOverride" type="Boolean"
+                        description="The text displayed in column 1 should link to a specific record"/>
+            <property label="Column 2 Linked Record" name="column2LinkedRecord" type="String"
+                        description="A formaula field on the child object that stores the Id of the record to link to."/>
+            <property label="Column 2 Linked Record Object API Name" name="column2LinkedObject" type="String"
+                        description="The API name of the object for the record that is being linked."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

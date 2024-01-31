@@ -1,0 +1,118 @@
+<template>
+    <div class="slds-theme_default slds-p-around_small">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={drinksIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class={drinksTextColorClasses}
+                                            title="Related List Name">Drinks Remaining: {drinksRemaining}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Exercise Counter -->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={exerciseIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Related List Name">Exercise Logged: {exerciseLogged}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Start Behavior Counter -->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={behaviorIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Related List Name">Behavior Logged: {otherBehaviorLogged}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-text-longform">
+            <h3 class="slds-text-heading_small">
+                Scoring
+            </h3>
+            <ul>
+                <li>
+                    Drinking: 
+                    <ul>
+                        <li>Awarded 1 star per drink under 7 consumed per week.</li>
+                        <li>Max of 3 stars.</li>
+                        <li>Penalized one star per drink over 10 consumed per week.</li>
+                    </ul>
+                </li>
+                <li>
+                    Exercise:
+                    <ul>
+                        <li>Awarded 1 star for 2 exercises.</li>
+                        <li>Awarded additional stars for 3rd and 4th exercises.</li>
+                        <li>Max of 3 stars.</li>
+                    </ul>
+                </li>
+                <li>
+                    Other Behavior:
+                    <ul>
+                        <li>Awarded stars for behaviors according to the star value on the corresponding behavior type.</li>
+                        <li>
+                            Possible Behaviors:
+                            <ul>
+                                <template for:each={behaviorTypes} for:item="behavior">
+                                    <li key={behavior.Id}>{behavior.Name}</li>
+                                </template>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>

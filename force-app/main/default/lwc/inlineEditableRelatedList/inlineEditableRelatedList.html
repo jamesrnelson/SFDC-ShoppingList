@@ -1,0 +1,237 @@
+<template>
+    <div class="slds-theme_default">
+        <div class="container-identifier slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container">
+                                <lightning-icon icon-name={relatedListIcon}>
+                                </lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Related List Name">{relatedListName} ({retRecordsLength})</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <c-record-form
+                    create-or-edit="Create"
+                    label="New"
+                    object-api-name={childObjectApiName}
+                    record-type={recordType}
+                    related-parent-record={recordId}
+                    parent-lookup-field={parentLookupField}>
+                </c-record-form>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-border_bottom slds-p-top_small header-height">
+            <span class="slds-grid slds-wrap slds-size_11-of-12 slds-p-left_small slds-m-top_x-small slds-m-bottom_x-small">
+                <template if:true={column1}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column1">{columnLabels.column0}</button>
+                    </span>                    
+                </template> 
+                <template if:true={column2}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column2">{columnLabels.column1}</button>
+                    </span>
+                </template>
+                <template if:true={column3}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column3">{columnLabels.column2}</button>
+                    </span>
+                </template>
+                <template if:true={column4}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column4">{columnLabels.column3}</button>
+                    </span>
+                </template>
+                <template if:true={column5}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column5">{columnLabels.column4}</button>
+                    </span>
+                </template>
+                <template if:true={column6}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column6">{columnLabels.column5}</button>
+                    </span>
+                </template>
+                <template if:true={column7}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column7">{columnLabels.column6}</button>
+                    </span>
+                </template>
+                <template if:true={column8}>
+                    <span class={columnWidth}>
+                        <button class="slds-button" onclick={handleSort} value="column8">{columnLabels.column7}</button>
+                    </span>
+                </template>
+            </span>
+        </div>
+
+        <div class="slds-scrollable_y allow-overflow" style="max-height:30rem">
+            <template for:each={recordsToDisplay} for:item="record">
+                <template if:true={isEditable}>
+                    <lightning-record-edit-form key={record.Id} object-api-name={childObjectApiName}>
+                        <div class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small" data-id={record.Id}>
+                            <span class="slds-size_11-of-12 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                                <template if:true={column1}>
+                                    <span class={columnWidth}>
+                                        <template if:true={column1LinkOverride}>
+                                            <c-record-link
+                                                object-api-name={column1LinkedObject}
+                                                record-id={record.column1Link}
+                                                value-to-link={record.column1}
+                                            ></c-record-link>
+                                        </template>
+                                        <template if:false={column1LinkOverride}>
+                                            <lightning-input-field field-name={column1} variant={labelVariant} value={record.column1} onchange={handleOnChange}>
+                                            </lightning-input-field>
+                                        </template>
+                                    </span>
+                                </template>
+                                <template if:true={column2}>
+                                    <span class={columnWidth}>
+                                        <template if:true={column2LinkOverride}>
+                                            <c-record-link
+                                                object-api-name={column2LinkedObject}
+                                                record-id={record.column2Link}
+                                                value-to-link={record.column2}
+                                            ></c-record-link>
+                                        </template>
+                                        <template if:false={column2LinkOverride}>
+                                            <lightning-input-field field-name={column2} variant={labelVariant} value={record.column2} onchange={handleOnChange}>
+                                            </lightning-input-field>
+                                        </template>
+                                    </span>
+                                </template>
+                                <template if:true={column3}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column3} variant={labelVariant} value={record.column3} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                                <template if:true={column4}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column4} variant={labelVariant} value={record.column4} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                                <template if:true={column5}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column5} variant={labelVariant} value={record.column5} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                                <template if:true={column6}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column6} variant={labelVariant} value={record.column6} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                                <template if:true={column7}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column7} variant={labelVariant} value={record.column7} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                                <template if:true={column8}>
+                                    <span class={columnWidth}>
+                                        <lightning-input-field field-name={column8} variant={labelVariant} value={record.column8} onchange={handleOnChange}>
+                                        </lightning-input-field>
+                                    </span>
+                                </template>
+                            </span>
+                            <span class="slds-size_1-of-12">
+                                <c-record-form
+                                    record-id={record.Id}
+                                    create-or-edit="Edit"
+                                    label="Edit"
+                                    object-api-name={childObjectApiName}>
+                                </c-record-form>
+                            </span>
+                        </div>
+                    </lightning-record-edit-form>
+                </template>
+
+                <!-- Display the values of fields to users that do not have the Inline_Editable_Related_List_User custom permission. -->
+                <template if:false={isEditable}>
+                    <lightning-record-view-form key={record.Id} record-id={record.Id} object-api-name={childObjectApiName}>
+                        <div class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small" data-id={record.Id}>
+                            <span class="slds-size_11-of-12 slds-grid slds-gutters slds-p-left_small">
+                                <template if:true={column1}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column1} variant="label-hidden" value={record.column1} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column2}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column2} variant="label-hidden" value={record.column2} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column3}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column3} variant="label-hidden" value={record.column3} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column4}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column4} variant="label-hidden" value={record.column4} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column5}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column5} variant="label-hidden" value={record.column5} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column6}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column6} variant="label-hidden" value={record.column6} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column7}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column7} variant="label-hidden" value={record.column7} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                                <template if:true={column8}>
+                                    <span class={columnWidth}>
+                                        <lightning-output-field field-name={column8} variant="label-hidden" value={record.column8} onchange={handleOnChange}>
+                                        </lightning-output-field>
+                                    </span>
+                                </template>
+                            </span>
+                            <span class="slds-size_1-of-12">
+                                <c-record-form
+                                    record-id={record.Id}
+                                    create-or-edit="Edit"
+                                    label="Edit"
+                                    object-api-name={childObjectApiName}>
+                                </c-record-form>
+                            </span>
+                        </div>
+                    </lightning-record-view-form>
+                </template>
+            </template>
+        </div>
+        <div class="slds-align_absolute-center slds-m-around_medium">
+            <button class="slds-button" onclick={handleViewAll} value="">View All</button>
+        </div>
+    </div>
+</template>
