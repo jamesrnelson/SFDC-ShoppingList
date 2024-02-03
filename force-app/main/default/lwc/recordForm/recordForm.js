@@ -12,6 +12,7 @@ export default class RecordForm extends LightningElement {
     @api recordType;  //expects the record type label (NOT the record type developer name)
     @api relatedParentRecord;
     @api parentLookupField;
+    @api customLayoutOverride = false;
 
     @track showObjectModal;
     @track objectInfo;
