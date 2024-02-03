@@ -23,16 +23,44 @@
                 </header>
                 <!-- modal body start -->
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                    <lightning-record-form
-                        record-id={recordId}
-                        object-api-name={objectApiName}
-                        record-type-id={recordTypeId}
-                        layout-type="Full"
-                        mode={createOrEdit}
-                        onsubmit={handleSubmit}
-                        oncancel={handleCancel}>
-                    </lightning-record-form>
-                    
+                    <template lwc:if={customLayoutOverride}>
+                        <p>test test before record form</p>
+                        <lightning-record-edit-form
+                            object-api-name={objectApiName}
+                            onsubmit={handleSubmit}
+                            oncancel={handleCancel}>
+                            <p>test test</p>
+                            <lightning-input-field field-name="Shopping_List__c" value={relatedParentRecord}></lightning-input-field>
+                            <lightning-input-field field-name="Quantity__c"></lightning-input-field>
+                            <lightning-input-field field-name="Measurement__c"></lightning-input-field>
+                            <lightning-input-field field-name="Ingredient__c"></lightning-input-field>
+                            <lightning-button
+                                class="slds-m-top_small"
+                                variant="default"
+                                type="cancel"
+                                name="Cancel"
+                                label="Cancel"
+                            ></lightning-button>
+                            <lightning-button
+                                class="slds-m-top_small"
+                                variant="brand"
+                                type="submit"
+                                name="Add"
+                                label="Add"
+                            ></lightning-button>
+                        </lightning-record-edit-form>
+                    </template>
+                    <template lwc:else>
+                        <lightning-record-form
+                            record-id={recordId}
+                            object-api-name={objectApiName}
+                            record-type-id={recordTypeId}
+                            layout-type="Full"
+                            mode={createOrEdit}
+                            onsubmit={handleSubmit}
+                            oncancel={handleCancel}>
+                        </lightning-record-form>
+                    </template>
                 </div>
             </div>
         </section>
