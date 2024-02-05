@@ -13,6 +13,7 @@ export default class RecordForm extends LightningElement {
     @api relatedParentRecord;
     @api parentLookupField;
     @api customLayoutOverride = false;
+    @api variant;
 
     @track showObjectModal;
     @track objectInfo;
