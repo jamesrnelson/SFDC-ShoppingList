@@ -10,29 +10,32 @@
                 parent-lookup-field="Shopping_List__c"
                 onchildsubmit={handleChildSubmit}
                 custom-layout-override="true"
+                variant="brand"
             >
             </c-record-form>
         </div>
     </div>
     <template for:each={addedIngredients} for:item="ingredient">
         <div key={ingredient.Id} class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small">
-            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-p-left_small slds-grid_vertical-align-center">
                 <span class="slds-col slds-size_1-of-12">
                     <lightning-record-edit-form object-api-name="Shopping_List_Ingredient__c" record-id={ingredient.Id} data-id={ingredient.Id}>
                         <lightning-messages></lightning-messages>
                         <lightning-input-field variant="label-hidden" onchange={saveChangedCheckbox} field-name="Checked__c"> </lightning-input-field>
                     </lightning-record-edit-form>
                 </span>
-                <span class="slds-col slds-size_5-of-12">{ingredient.Quantity__c} {ingredient.Measurement__c}</span>
-                <span class="slds-col slds-size_5-of-12">{ingredient.Ingredient__r.Name}</span>
-                <span class="slds-col slds-size_1-of-12">
+                <span class="slds-col slds-size_2-of-12">{ingredient.Quantity__c} {ingredient.Measurement__c}</span>
+                <span class="slds-col slds-size_8-of-12">{ingredient.Ingredient__r.Name}</span>
+                <span class="slds-col slds-size_1-of-12 slds-float_right">
                     <c-record-form
+                        class="slds-float_right"
                         create-or-edit="Edit"
                         label="Edit"
                         object-api-name="Shopping_List_Ingredient__c"
                         related-parent-record={recordId}
                         parent-lookup-field="Shopping_List__c"
                         record-id={ingredient.Id}
+                        variant="default"
                     >
                     </c-record-form>
                 </span>
