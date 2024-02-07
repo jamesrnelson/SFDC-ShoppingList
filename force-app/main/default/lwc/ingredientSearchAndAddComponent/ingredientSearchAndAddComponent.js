@@ -110,7 +110,7 @@ export default class IngredientSearchAndAddComponent extends LightningElement {
         // udpate here so that it can be a recipe or shopping list
         let junctionIngredient = {
             Ingredient__c: ingredientId,
-            Quantity: this.draftValues[ingredientId]['Quantity__c'],
+            Quantity__c: this.draftValues[ingredientId]['Quantity__c'],
             Measurement__c: this.draftValues[ingredientId]['Measurement__c']
         }
        
