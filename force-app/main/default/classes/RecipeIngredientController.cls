@@ -120,6 +120,18 @@ public with sharing class RecipeIngredientController {
         }
     }
 
+    @AuraEnabled
+    public static void createRecipeOrShoppingListIngredient(String junctionIngredient) {
+        try {
+            SObject recordToInsert = (SObject)JSON.deserialize(junctionIngredient, SObject.class);
+            insert recordToInsert;
+        } catch(Exception e) {
+            throw new AuraHandledException('There was an error adding the ingredient. See this error: ' +
+                e.getMessage() + 'Stack Trace: ' + e.getStackTraceString()
+            );
+        }
+    }
+
     public static Shopping_List_Ingredient__c convertRecipeIngredientToShoppingListIngredient(Recipe_Ingredient__c recipeIngredient, String shoppingListId) {
         return new Shopping_List_Ingredient__c(
             Ingredient__c = recipeIngredient.Ingredient__c,
