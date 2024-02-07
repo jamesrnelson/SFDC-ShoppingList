@@ -24,6 +24,7 @@ export default class AddIngredient extends LightningElement {
     }
 
     closeObjectModal() {
+        this.dispatchEvent(new CustomEvent('reloadshoppinglistingredients'));
         this.showObjectModal = false;
         //this.resetModalSpinner();
     }
