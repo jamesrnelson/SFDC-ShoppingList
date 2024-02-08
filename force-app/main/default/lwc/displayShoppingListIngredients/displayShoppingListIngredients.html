@@ -25,24 +25,15 @@
     <template for:each={addedIngredients} for:item="ingredient">
 
         <div key={ingredient.Id} class="slds-grid slds-border_bottom slds-m-top_x-small slds-m-bottom_x-small">
-            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-p-left_small slds-grid_vertical-align-center">
-                <span class="slds-col slds-size_3-of-12">
-                <lightning-record-edit-form object-api-name="Shopping_List_Ingredient__c" record-id={ingredient.Id} data-id={ingredient.Id}>
-                    <div class="slds-grid slds-wrap">
+            <span class="slds-size_1-of-1 slds-grid slds-wrap slds-gutters slds-p-left_small slds-grid_vertical-align-center">
+                <span class="slds-col slds-size_2-of-12">
+                    <lightning-record-edit-form object-api-name="Shopping_List_Ingredient__c" record-id={ingredient.Id} data-id={ingredient.Id}>
                         <lightning-messages></lightning-messages>
-                        <span class="slds-col slds-size_1-of-3">
-                            <lightning-input-field variant="label-hidden" onchange={saveChangedCheckbox} field-name="Checked__c"> </lightning-input-field>
-                        </span>
-                        <span class="slds-col slds-size_2-of-3">
-                            <lightning-input-field variant="label-hidden" onchange={saveChangedCheckbox} field-name="Quantity__c"> </lightning-input-field>
-                        </span>
-
-                    </div>
+                        <lightning-input-field variant="label-hidden" onchange={saveChangedCheckbox} field-name="Checked__c"> </lightning-input-field>
                     </lightning-record-edit-form>
                 </span>
-                <span class="slds-col slds-size_1-of-12">{ingredient.Measurement__c}</span>
-                <span class="slds-col slds-size_8-of-12">{ingredient.Ingredient__r.Name}</span>
-
+                <span class="slds-col slds-size_5-of-12">{ingredient.Quantity__c} {ingredient.Measurement__c}</span>
+                <span class="slds-col slds-size_5-of-12">{ingredient.Ingredient__r.Name}</span>
             </span>
         </div>
     </template>
