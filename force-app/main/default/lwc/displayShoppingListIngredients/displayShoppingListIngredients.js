@@ -41,7 +41,7 @@ export default class DisplayShoppingListIngredients extends LightningElement {
         const value = event.target.value;
         console.log('value', value);
         console.log('target:: ', event.target);
-        const dataId = event.target.parentNode.parentNode.parentNode.getAttribute("data-id");
+        const dataId = event.target.parentNode.getAttribute("data-id");
         console.log('data-id:: ', dataId);
         if (this.recordsToUpdate[dataId] == null) {
             this.recordsToUpdate[dataId] = {
