@@ -1,0 +1,21 @@
+<template>
+        <div class="slds-theme">
+            <div class="slds-grid slds-wrap slds-grid_vertical-align-end">
+                <div class="slds-col slds-form-element">
+                    <label class="slds-form-element__label" for="shopping-list-select">Shopping List</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                            <select class="slds-select shoppinglist" name="optionSelect" id="shopping-list-select" onchange={handleShoppingListClick}>
+                                <template for:each={shoppingLists} for:item="shoppingList">
+                                    <option key={shoppingList.Id} value={shoppingList.Id}>{shoppingList.Name}, {shoppingList.CreatedBy.Name}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <c-recipe-ingredients
+                record-id={selectedRecordId}
+            ></c-recipe-ingredients>
+        </div>
+</template>
