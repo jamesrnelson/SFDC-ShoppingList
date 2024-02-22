@@ -237,4 +237,14 @@ public with sharing class RecipeIngredientController {
         }
         return multiplier * quantity;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Shopping_List__c> getMostRecentShoppingLists(){
+        try {
+            List<Shopping_List__c> lists = [SELECT Id, Name, CreatedBy.Name, Store__r.Name, CreatedDate FROM Shopping_List__c ORDER BY CreatedDate DESC LIMIT 10];
+            return lists;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
